@@ -14,16 +14,23 @@ defmodule Advent2017.Day01 do
     end
     
     def put_first_in_last(list) do
+      # Take the first element of the list and
+      # put it into the end of the list
       list ++ Enum.take(list, 1)
       |> Enum.drop(1)
     end
     
     def validate_chunks(list) do
+      # Filter out the paired chunks that
+      # don't have the same elements
       list
       |> Enum.filter(fn [a, b] -> a == b end)
     end
     
     def flatten_chunks(list) do
+      # We only care about the value of the
+      # pairs in the chunk, so we might as well
+      # just keep the first element
       list 
       |> Enum.map(fn [a, _] -> a end)
     end

@@ -1,15 +1,31 @@
 defmodule Advent2017.Day01 do
-  @input File.read!("inputs/day01.txt")
+  @input File.read!("inputs/day01.txt") |> String.split("", trim: true)
   
-  def run do
-    @input
-    |> String.split("", trim: true)
-    |> put_first_in_last
-    |> IO.inspect
-  end
-  
-  def put_first_in_last(list) do
-    list ++ Enum.take(list, 1)
-    |> Enum.drop(1)
+  defmodule Part1 do
+    def run do
+      @input
+      |> put_first_in_last
+      |> Enum.chunk_every(2, 1, :discard)
+      |> validate_chunks
+      |> flatten_chunks
+      |> Enum.map(&String.to_integer(&1))
+      |> Enum.sum
+      |> IO.inspect
+    end
+    
+    def put_first_in_last(list) do
+      list ++ Enum.take(list, 1)
+      |> Enum.drop(1)
+    end
+    
+    def validate_chunks(list) do
+      list
+      |> Enum.filter(fn [a, b] -> a == b end)
+    end
+    
+    def flatten_chunks(list) do
+      list 
+      |> Enum.map(fn [a, _] -> a end)
+    end
   end
 end

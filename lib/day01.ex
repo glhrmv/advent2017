@@ -1,9 +1,10 @@
 defmodule Advent2017.Day01 do
-  @input File.read!("inputs/day01.txt") |> String.split("", trim: true)
-  
   defmodule Part1 do
+    @input File.read!("inputs/day01.txt")
+    
     def run do
       @input
+      |> String.split("", trim: true)
       |> put_first_in_last
       |> Enum.chunk_every(2, 1, :discard)
       |> validate_chunks

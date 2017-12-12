@@ -1,6 +1,10 @@
 defmodule Advent2017.Day02 do
   @input File.read!("inputs/day02.txt")
   
+  def input do
+    @input
+  end
+  
   def parse(input) do
     input
     |> String.split("\n", trim: true) # Split line by line
@@ -12,16 +16,12 @@ defmodule Advent2017.Day02 do
   end
   
   def row_difference(row) do
-    Enum.max(row) - Enum.min(row) # Difference between the max and min values
+    Enum.max(row) - Enum.min(row)
   end
   
   def divisible_elements(row) do
     even_elems = for x <- row, y <- row, x != y, rem(x, y) == 0, do: div(x, y)
     hd(even_elems)
-  end
-  
-  def input do
-    @input
   end
 end
 

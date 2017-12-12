@@ -1,6 +1,10 @@
 defmodule Advent2017.Day01 do
   @input File.read!("inputs/day01.txt")
   
+  def input do
+    @input
+  end
+  
   def put_first_in_last(list) do
     # Take the first element of the list and
     # put it into the end of the list
@@ -21,10 +25,6 @@ defmodule Advent2017.Day01 do
     # just keep the first element
     list 
     |> Enum.map(fn [a, _] -> a end)
-  end
-  
-  def input do
-    @input
   end
 end
 

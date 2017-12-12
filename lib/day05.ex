@@ -1,5 +1,5 @@
 defmodule Advent2017.Day05 do
-  @input File.read!("inputs/day05.txt") |> String.split("\n", trim: true)
+  @input File.read!("inputs/day05.txt")
   
   def input do
     @input
@@ -26,6 +26,7 @@ defmodule Advent2017.Day05.Part1 do
   
   def run do
     input()
+    |> String.split("\n", trim: true)
     |> Enum.map(&String.to_integer/1)
     |> jump
     |> IO.inspect

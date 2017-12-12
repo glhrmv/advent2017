@@ -1,5 +1,5 @@
 defmodule Advent2017.Day03 do
-  @input File.read!("inputs/day03.txt") |> String.to_integer
+  @input File.read!("inputs/day03.txt")
   
   def input do
     @input
@@ -11,6 +11,7 @@ defmodule Advent2017.Day03.Part1 do
   
   def run do
     input()
+    |> String.to_integer
     |> IO.inspect
   end
 end

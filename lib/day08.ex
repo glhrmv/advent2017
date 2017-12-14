@@ -19,13 +19,15 @@ defmodule Advent2017.Day08 do
   end
   
   def check_condition(curr, registers) do
+    condition_target_reg = Map.get(registers, curr.ctarget, 0)
+    
     case curr.copt do
-      ">" -> Map.get(registers, curr.ctarget, 0) > curr.carg
-      "<" -> Map.get(registers, curr.ctarget, 0) < curr.carg
-      ">=" -> Map.get(registers, curr.ctarget, 0) >= curr.carg
-      "==" -> Map.get(registers, curr.ctarget, 0) == curr.carg
-      "<=" -> Map.get(registers, curr.ctarget, 0) <= curr.carg
-      "!=" -> Map.get(registers, curr.ctarget, 0) != curr.carg
+      ">" -> condition_target_reg > curr.carg
+      "<" -> condition_target_reg < curr.carg
+      ">=" -> condition_target_reg >= curr.carg
+      "==" -> condition_target_reg == curr.carg
+      "<=" -> condition_target_reg <= curr.carg
+      "!=" -> condition_target_reg != curr.carg
     end
   end
 

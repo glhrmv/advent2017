@@ -1,9 +1,7 @@
 defmodule Advent2017.Day04 do
   @input File.read!("inputs/day04.txt")
   
-  def input do
-    @input
-  end
+  def input, do: @input
   
   def validate(list) do
     list

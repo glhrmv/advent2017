@@ -1,9 +1,7 @@
 defmodule Advent2017.Day02 do
   @input File.read!("inputs/day02.txt")
   
-  def input do
-    @input
-  end
+  def input, do: @input
   
   def parse(input) do
     input

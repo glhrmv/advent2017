@@ -1,9 +1,7 @@
 defmodule Advent2017.Day01 do
   @input File.read!("inputs/day01.txt")
   
-  def input do
-    @input
-  end
+  def input, do: @input
   
   def put_first_in_last(list) do
     # Take the first element of the list and

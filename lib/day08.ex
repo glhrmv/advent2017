@@ -1,9 +1,7 @@
 defmodule Advent2017.Day08 do
   @input File.read!("inputs/day08.txt")
   
-  def input do
-    @input
-  end
+  def input, do: @input
   
   def parse_instructions(input) do
     [reg, op, arg, "if", ctarget, copt, carg] = String.split(input)

@@ -12,7 +12,7 @@ defmodule Advent2017.Day01 do
     |> Enum.drop(1)
   end
   
-  def validate_chunks(list) do
+  def validate_paired_chunks(list) do
     # Filter out the paired chunks that
     # don't have the same elements
     list
@@ -26,6 +26,18 @@ defmodule Advent2017.Day01 do
     list 
     |> Enum.map(fn [a, _] -> a end)
   end
+  
+  def double_and_zip(list) do
+    # Shift the input list from its
+    # halfway point until the end
+    half_of_list = div(length(list), 2)
+    shifted = Enum.slice(list ++ list, half_of_list, length(list))
+    
+    # Partner every digit with its 
+    # "halfway-round" digit
+    List.zip([list, shifted])
+    |> Enum.map(fn {a, b} -> [a, b] end)
+  end
 end
 
 defmodule Advent2017.Day01.Part1 do
@@ -35,10 +47,25 @@ defmodule Advent2017.Day01.Part1 do
     input()
     |> String.split("", trim: true)
     |> put_first_in_last
-    |> Enum.chunk_every(2, 1, :discard)
-    |> validate_chunks
+    |> Enum.chunk_every(2, 1)
+    |> validate_paired_chunks
     |> flatten_chunks
-    |> Enum.map(&String.to_integer(&1))
+    |> Enum.map(&String.to_integer/1)
+    |> Enum.sum
+    |> IO.inspect
+  end
+end
+
+defmodule Advent2017.Day01.Part2 do
+  import Advent2017.Day01
+  
+  def run do
+    input()
+    |> String.split("", trim: true)
+    |> double_and_zip
+    |> validate_paired_chunks
+    |> flatten_chunks
+    |> Enum.map(&String.to_integer/1)
     |> Enum.sum
     |> IO.inspect
   end

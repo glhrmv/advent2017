@@ -3,29 +3,30 @@ defmodule Advent2017.Day08 do
   
   def input, do: @input
   
-  def parse_instructions(input) do
-    [reg, op, arg, "if", ctarget, copt, carg] = String.split(input)
+  def parse_instructions(instruction) do
+    # Parse the instruction using pattern matching
+    [reg, op, arg, "if", ctarget, copt, carg] = String.split(instruction)
     
     %{
-      reg: reg,
-      op: op,
-      arg: String.to_integer(arg),
-      ctarget: ctarget,
-      copt: copt,
-      carg: String.to_integer(carg)
+      reg: reg, # Name of the register
+      op: op, # Operation to perform (inc, dec)
+      arg: String.to_integer(arg), # Value to perform the operation with
+      ctarget: ctarget, # Target register to compare with
+      copt: copt, # Comparison operator (>, <, ==, ...)
+      carg: String.to_integer(carg) # Value to compare target's value with
     }
   end
   
   def check_condition(curr, registers) do
-    condition_target_reg = Map.get(registers, curr.ctarget, 0)
+    ctarget_reg = Map.get(registers, curr.ctarget, 0)
     
     case curr.copt do
-      ">" -> condition_target_reg > curr.carg
-      "<" -> condition_target_reg < curr.carg
-      ">=" -> condition_target_reg >= curr.carg
-      "==" -> condition_target_reg == curr.carg
-      "<=" -> condition_target_reg <= curr.carg
-      "!=" -> condition_target_reg != curr.carg
+      ">" -> ctarget_reg > curr.carg
+      "<" -> ctarget_reg < curr.carg
+      ">=" -> ctarget_reg >= curr.carg
+      "==" -> ctarget_reg == curr.carg
+      "<=" -> ctarget_reg <= curr.carg
+      "!=" -> ctarget_reg != curr.carg
     end
   end
 
@@ -42,18 +43,20 @@ defmodule Advent2017.Day08 do
     end
   end
 
-  def run(input, registers \\ %{})
-  def run([curr | rest], reg) do
-    if check_condition(curr, reg) do
-      reg = update_registers(curr, reg)
-      run(rest, reg)
+  # Initialise the registers map before 
+  # going through instructions
+  def run(input, regs \\ %{})
+  def run([curr | rest], regs) do
+    if check_condition(curr, regs) do
+      reg = update_registers(curr, regs)
+      run(rest, regs)
     else
-      run(rest, reg)
+      run(rest, regs)
     end
   end
-  
-  def run([], reg) do
-    reg
+
+  def run([], regs) do
+    regs
   end
 end
 

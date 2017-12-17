@@ -1,23 +1,32 @@
 defmodule Advent2017.Day05 do
   @input File.read!("inputs/day05.txt")
   
-  def input do
-    @input
+  def input, do: @input
+  
+  def to_map(list) do
+    to_map(%{}, Enum.with_index(list))
   end
   
-  def jump(instructions) do
-    jump(instructions, 0, 0)
+  def to_map(map, [{value, index} | rest]) do
+    to_map(Map.put(map, index, value), rest)
   end
   
-  defp jump(instructions, i, count) when i >= length(instructions) or i < 0 do
-    count
+  def to_map(map, []), do: map
+  
+  def jump(map, pos \\ 0, steps \\ 0) do
+    if pos in Map.keys(map) do
+      {offset, new_map} = Map.get_and_update(map, pos, &update_offset/1)
+      IO.inspect new_map
+      jump(new_map, pos + offset, steps + 1)
+    else 
+      # We're out of bounds, so
+      # return the amount of steps
+      steps
+    end
   end
   
-  defp jump(instructions, i, count) do
-    jump_offset = Enum.at(instructions, i)
-    instructions = List.update_at(instructions, i, &(&1 + 1))
-    
-    jump(instructions, jump_offset + i, count + 1)
+  defp update_offset(offset) do
+    if offset >= 3, do: {offset, offset - 1}, else: {offset, offset + 1}
   end
 end
 
@@ -28,6 +37,20 @@ defmodule Advent2017.Day05.Part1 do
     input()
     |> String.split("\n", trim: true)
     |> Enum.map(&String.to_integer/1)
+    |> to_map
+    |> jump
+    |> IO.inspect
+  end
+end
+
+defmodule Advent2017.Day05.Part2 do
+  import Advent2017.Day05
+  
+  def run do
+    input()
+    |> String.split("\n", trim: true)
+    |> Enum.map(&String.to_integer/1)
+    |> to_map
     |> jump
     |> IO.inspect
   end

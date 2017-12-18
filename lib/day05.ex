@@ -16,7 +16,7 @@ defmodule Advent2017.Day05 do
   def jump(map, pos \\ 0, steps \\ 0) do
     if pos in Map.keys(map) do
       {offset, new_map} = Map.get_and_update(map, pos, &update_offset/1)
-      IO.inspect new_map
+
       jump(new_map, pos + offset, steps + 1)
     else 
       # We're out of bounds, so
@@ -26,24 +26,11 @@ defmodule Advent2017.Day05 do
   end
   
   defp update_offset(offset) do
-    if offset >= 3, do: {offset, offset - 1}, else: {offset, offset + 1}
+    {offset, offset + 1}
   end
 end
 
 defmodule Advent2017.Day05.Part1 do
-  import Advent2017.Day05
-  
-  def run do
-    input()
-    |> String.split("\n", trim: true)
-    |> Enum.map(&String.to_integer/1)
-    |> to_map
-    |> jump
-    |> IO.inspect
-  end
-end
-
-defmodule Advent2017.Day05.Part2 do
   import Advent2017.Day05
   
   def run do

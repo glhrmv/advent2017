@@ -19,11 +19,11 @@ defmodule Advent2017.Day11 do
   end
   
   def process(list, data \\ {{0, 0}, 0})
-  def process([], {pos, max}) do
+  def process([], {{_x, _y} = pos, max}) do
     {distance(pos), max}
   end
   
-  def process([curr | rest], {pos, max}) do
+  def process([curr | rest], {{_x, _y} = pos, max}) do
     pos = step(pos, curr)
     distance = distance(pos)
     process(rest, {pos, Enum.max([distance, max])})

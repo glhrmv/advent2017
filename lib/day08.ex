@@ -49,7 +49,7 @@ defmodule Advent2017.Day08 do
   def run([curr | rest], regs) do
     if check_condition(curr, regs) do
       reg = update_registers(curr, regs)
-      run(rest, regs)
+      run(rest, reg)
     else
       run(rest, regs)
     end

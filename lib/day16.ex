@@ -46,15 +46,17 @@ defmodule Advent2017.Day16 do
     partner(String.graphemes(programs), program_a, program_b)
   end
   
-  def partner(lst, a, b, acc \\ [])
-  def partner([h|tl], a, b, acc) when h == a do
-    partner(tl, a, b, [b|acc])
+  # Basic recursive function for
+  # replacing 2 given elements in a list
+  def partner(list, a, b, acc \\ [])
+  def partner([h | tl], a, b, acc) when h == a do
+    partner(tl, a, b, [b | acc])
   end
-  def partner([h|tl], a, b, acc) when h == b do
-    partner(tl, a, b, [a|acc])
+  def partner([h | tl], a, b, acc) when h == b do
+    partner(tl, a, b, [a | acc])
   end
-  def partner([h|tl], a,b, acc) do
-    partner(tl, a, b, [h|acc])
+  def partner([h | tl], a,b, acc) do
+    partner(tl, a, b, [h | acc])
   end
   def partner([], _, _, acc) do
     Enum.reverse(acc)
@@ -63,8 +65,7 @@ defmodule Advent2017.Day16 do
   
   def dance(list) do
     list
-    |> Enum.map(&parse_move/1)
-    |> Enum.reduce(@starting_dance, &process_dance/2)
+    
   end
 end
 
@@ -74,7 +75,8 @@ defmodule Advent2017.Day16.Part1 do
   def run do
     input()
     |> String.split(",", trim: true)
-    |> dance
+    |> Enum.map(&parse_move/1)
+    |> Enum.reduce(@starting_dance, &process_dance/2)
     |> IO.inspect
   end
 end

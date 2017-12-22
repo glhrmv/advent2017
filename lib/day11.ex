@@ -14,6 +14,7 @@ defmodule Advent2017.Day11 do
     end
   end
   
+  # Distance travelled by the vector
   def distance({x, y}) do
     abs(x) + abs(y)
   end

@@ -6,10 +6,10 @@ My [Advent of Code](https://adventofcode.com/) 2017 solutions, using Elixir.
 
 - [x] Day 01
 - [x] Day 02
-- [ ] Day 03
+- [x] Day 03
 - [x] Day 04
 - [x] Day 05
-- [ ] Day 06
+- [x] Day 06
 - [x] Day 07
 - [x] Day 08
 - [x] Day 09
